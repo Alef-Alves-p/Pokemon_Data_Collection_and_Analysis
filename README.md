@@ -19,19 +19,31 @@ Os dados são salvos em arquivos Parquet e particionados com base no tipo de Pok
 **Descrição**: Coleta dados dos Pokémons da API [PokeAPI](https://pokeapi.co/api/v2/pokemon), cria DataFrames e salva os dados em arquivos Parquet.
 
 **Como Executar**:
-1. Certifique-se de que o Python e as bibliotecas necessárias (requests, pandas, pyarrow) estão instalados.
-2. Execute o script:
+1. Ative sua variavel de ambiente (opcional):
+   ```bash
+   venv\Scripts\activate - windows
+   source venv/bin/activate - macOS e Linux
+2. Certifique-se de que o Python e as bibliotecas necessárias (requests, pandas, pyarrow) estão instalados.
+3. Execute o script:
    ```bash
    python fetch_and_save_pokemon_data.py
 
 **Como executar as querys**
-1. Certifique-se de que o Python e as bibliotecas necessárias (pandas, DuckDB) estão instalados.
-2. Execute cada script separadamente:
+1. Execute o script:
+   ```bash
+   python query_pokemon_data.py
+
+2. Certifique-se de que o Python e as bibliotecas necessárias (pandas, DuckDB) estão instalados.
+3. Acesse a pasta querys para rodar os scripts a seguir com o comando:
+   ```bash
+   cd caminho\da\pasta\teste\querys
+
+4. Execute cada script separadamente:
    ```bash
    python top_5_moves.py
    python distinct_moves_count.py
-   python max_weight_pokemon.py
-   python min_height_pokemon.py
+   python max_weight_pokemons.py
+   python min_height_pokemons.py
    python average_weight.py
    python average_height.py
 
@@ -49,6 +61,7 @@ Cada script deve ser executado separadamente para obter os resultados corretos.
 1. Certifique-se de que o Python e as bibliotecas necessárias (pandas, os) estão instalados.
 2. Execute o script:
    ```bash
+    cd .. - para sair da pasta querys
     python partition_by_types.py
 
 

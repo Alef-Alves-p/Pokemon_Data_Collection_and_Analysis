@@ -2,6 +2,7 @@ import requests
 import pandas as pd
 import pyarrow as pa
 import pyarrow.parquet as pq
+import os
 
 # Get Data API
 def fetch_pokemon_data(base_url, limit=20):
@@ -24,7 +25,7 @@ def fetch_pokemon_data(base_url, limit=20):
     
     return all_pokemons
 
-# 
+# Create DataFrames
 def create_dataframes(pokemons):
     moves_data = []
     types_data = []
@@ -64,16 +65,19 @@ def create_dataframes(pokemons):
     
     return df_moves, df_types, df_dim
 
-# Salvando DataFrames como .Parquet
+# Save DataFrames as Parquet
 def save_to_parquet(df, filename):
     table = pa.Table.from_pandas(df)
     pq.write_table(table, filename)
     print(f"DataFrame saved to {filename}")
 
+# Create directory if it doesn't exist
+os.makedirs('data_base', exist_ok=True)
+
 # URL da API
 base_url = "https://pokeapi.co/api/v2/pokemon"
 
-# Coletansdo dados da API
+# Coletando dados da API
 print("Starting data collection from API...")
 pokemons = fetch_pokemon_data(base_url)
 print(f"Collected data for {len(pokemons)} pokemons")
@@ -84,8 +88,8 @@ df_moves, df_types, df_dim = create_dataframes(pokemons)
 
 # Salvar DataFrames como arquivos Parquet
 print("Saving DataFrames to Parquet files...")
-save_to_parquet(df_moves, 'data_base\df_moves.parquet')
-save_to_parquet(df_types, 'data_base\df_types.parquet')
-save_to_parquet(df_dim, 'data_base\df_dim.parquet')
+save_to_parquet(df_moves, 'data_base/df_moves.parquet')
+save_to_parquet(df_types, 'data_base/df_types.parquet')
+save_to_parquet(df_dim, 'data_base/df_dim.parquet')
 
 print("Dados coletados e salvos em formato Parquet com sucesso.")
